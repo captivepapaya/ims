@@ -1,13 +1,12 @@
-# 忽略所有数据文件
-*.csv
-*.xlsx
-*.xls
-*.db
-*.sqlite
-*.sqlite3
+# 忽略临时数据文件（保留项目的data目录）
+temp/*.csv
+temp/*.xlsx
+temp/*.xls
+temp/*.db
+temp/*.sqlite
+temp/*.sqlite3
 
-# 忽略整个 data 目录（保留目录结构）
-/data/
+# 保留项目的data目录及其内容
 
 # Python 相关
 __pycache__/

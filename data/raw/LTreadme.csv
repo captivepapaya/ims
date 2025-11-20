@@ -1,0 +1,57 @@
+列名,含义,是否必须,是否导入数据库
+Code,供应商产品代码,,Yes
+SU,供应商代码,,Yes
+SKU,统一SKU产品码，由供应商代码的一位字母缩小+三位数字CatCode+五位数字ModelCode组成,,Yes
+Barcode,供应商条形码,Opt,Yes
+Description,供应商原始产品说明,,Yes
+NetCost,来自供应商的供货价原价(未税),Opt,Yes
+DiscRate,供应商提供的系统折扣百分比,Opt,Yes
+FinalCost,NetCost*(1-DiscRate),Opt,Yes
+RefPrice,参考销售价(含税)，一般是FinalCost*2.5,Opt,Yes
+ListPrice,常规销售价(含税)或折扣销售价(如有),,Yes
+RegularPrice,常规销售价参考(含税),Opt,Yes
+SalePrice,折扣销售价(含税),Opt,Yes
+HL,产品高度或者长度,,Yes
+Location,仓位,Opt,Yes
+Color,产品描述中的颜色,,Yes
+Cluster,在网站中，产品颜色归属的颜色大类,,Yes
+AttColor,自动化计算出来的颜色大类,Opt,No
+Qty,总采购数量,,Yes
+Stock,当前库存,,Yes
+Sold,已经销售的数量,,Yes
+SiteStock,此列没有使用,Opt,No
+StockStatus,"网站中的库存状态，有四种状态：未标注，instock，onbackorder, outofstock",,Yes
+CatCode,子类别对应的代码，三位数字，CatCode和ModelCode组成SKU的后8位数字的部分,,Yes
+AppliedModel,手动填写的产品序号，五位数字,Opt,Yes
+ModelCode,最终的产品序号，五位数字，CatCode和ModelCode组成SKU的后8位数字的部分,,Yes
+Category,大类别原来的英文名称，共八个大类别,,Yes
+SubCat,子类别的英文名称，CatCode和子类别相关,,Yes
+PostID,产品详情页在Wordpress网站中的Post ID,Opt,Yes
+PostTitle,产品详情页在Wordpress网站中的Post Title,Opt,Yes
+PostSlug,产品详情页在Wordpress网站中的Post Slug,Opt,Yes
+PostContent,产品详情页在Wordpress网站中的Post Content，就是产品描述,Opt,Yes
+PostShortDesc,产品详情页在Wordpress网站中的短描述,Opt,Yes
+PostStatus,产品详情页在Wordpress网站中的发布状态,Opt,Yes
+ProductCat,Wordpress中该产品的category属性，如果属于多个，用 '|' 符合分开，'>' 表示大类目和子类目之间的关系,Opt,Yes
+ProductTag,产品Tag标志,Opt,Yes
+ProductStyle,产品形态标志，暂时未用,Opt,Yes
+FocusKW,产品详情页产品说明的焦点关键词,Opt,Yes
+MetaTitle,产品详情页的Meta Title信息,Opt,Yes
+MetaDesc,产品详情页的Meta 描述信息,Opt,Yes
+LinkDex,Yoast评估的链接,Opt,No
+ReadingTime,Yoast评估的读取时间,Opt,No
+ContentScore,Yoast评估的页面分数,Opt,No
+ProductPage,产品页面的URL,Opt,Yes
+Images,从Wordpress导出的产品图片的全部信息，含alt之类,Opt,Yes
+Image,产品主图所在的URL,Opt,Yes
+Comment,备注,Opt,Yes
+Judge,Gsheet公式需要用的备注符号，对数据库无用,,No
+nCategory,新设定的大类别英文名称,,Yes
+nSubCategory,新设定的子类别英文名称,,Yes
+Index,操作序号值，和Retool数据库记录条目数量有关,,Yes
+Price,用于条码打印的价格，理论上应该和ListPrice一致,,Yes
+Name,用于POS机的产品名称，含SKU和一般产品说明，长度适合收银条的宽度,,Yes
+PNDesc,用于条码打印的产品名称，长度适合条码打印设定的宽度,,Yes
+PNLen,PNDesc的字符串长度，要求在22个字符以内(含空格),,Yes
+Per,每个条码打印对应的倍数关系，如果是2，打印4个产品的条码，就需要打8张,,Yes
+PC,辅助备注选项,Opt,Yes
