@@ -1,0 +1,349 @@
+CatCode,nCategory,nSubCategory
+101,Artificial Flower Arrangements,Banksia Series
+102,Artificial Flower Arrangements,Cymbidium Series
+103,Artificial Flower Arrangements,Eucalyptus Series
+104,Artificial Flower Arrangements,Hydrangea Series
+105,Artificial Flower Arrangements,Lilac Series
+106,Artificial Flower Arrangements,Magnolia Series
+107,Artificial Flower Arrangements,Orchid Series
+108,Artificial Flower Arrangements,Peony Series
+109,Artificial Flower Arrangements,Phalaenopsis Series
+110,Artificial Flower Arrangements,Pieris Series
+111,Artificial Flower Arrangements,PinCushion Series
+112,Artificial Flower Arrangements,Protea Series
+113,Artificial Flower Arrangements,Rose Series
+114,Artificial Flower Arrangements,Scabiosa Series
+115,Artificial Flower Arrangements,Waratah Series
+100,Artificial Flower Arrangements,Other Arrangement
+501,Artificial Flowers,Akebia
+502,Artificial Flowers,Allium
+503,Artificial Flowers,Amaranthus
+504,Artificial Flowers,Anemone
+505,Artificial Flowers,Anthuriums
+506,Artificial Flowers,Aralia
+507,Artificial Flowers,Artichoke
+508,Artificial Flowers,Astilbes
+509,Artificial Flowers,Astrantia
+510,Artificial Flowers,BabysBreath
+511,Artificial Flowers,Banksia
+512,Artificial Flowers,Bean
+513,Artificial Flowers,Berries
+514,Artificial Flowers,Berzelia
+515,Artificial Flowers,Billy
+517,Artificial Flowers,Blossom
+518,Artificial Flowers,Blushing Brush
+519,Artificial Flowers,Bottle Brush
+520,Artificial Flowers,Bougainvilleas
+521,Artificial Flowers,Brunia
+522,Artificial Flowers,Bunny
+523,Artificial Flowers,Callistemon
+524,Artificial Flowers,Camellias
+525,Artificial Flowers,Carnation
+526,Artificial Flowers,Chrysanthemum
+527,Artificial Flowers,Clover
+528,Artificial Flowers,Cone
+529,Artificial Flowers,Craspedia
+530,Artificial Flowers,Corn Flower
+531,Artificial Flowers,Cosmos
+532,Artificial Flowers,Cotton
+533,Artificial Flowers,Cycad
+534,Artificial Flowers,Cymbidium
+535,Artificial Flowers,Dahlia
+536,Artificial Flowers,Delphinium
+537,Artificial Flowers,Dogwood
+538,Artificial Flowers,Dusty Miller
+539,Artificial Flowers,Eucalyptuses
+540,Artificial Flowers,Ferns
+541,Artificial Flowers,Fig
+542,Artificial Flowers,Flannel
+543,Artificial Flowers,Frangipani
+544,Artificial Flowers,Foxtail
+545,Artificial Flowers,Gerbera
+546,Artificial Flowers,Ginger
+547,Artificial Flowers,Gloriosa
+548,Artificial Flowers,Grass
+549,Artificial Flowers,Grevillea
+550,Artificial Flowers,Gum
+551,Artificial Flowers,Heather
+552,Artificial Flowers,Honesty
+553,Artificial Flowers,Hydrangea
+554,Artificial Flowers,Kalanchoes
+555,Artificial Flowers,Kangaroo Paw
+556,Artificial Flowers,Lambs Ear
+557,Artificial Flowers,Larkspur
+558,Artificial Flowers,Laurel
+559,Artificial Flowers,Lavenders
+560,Artificial Flowers,Lemon
+561,Artificial Flowers,Leucadendron
+562,Artificial Flowers,Lichen
+563,Artificial Flowers,Lily
+564,Artificial Flowers,Limonium
+565,Artificial Flowers,Lirio
+566,Artificial Flowers,Lisianthus
+567,Artificial Flowers,Lush
+568,Artificial Flowers,Magnolia
+569,Artificial Flowers,Maple
+570,Artificial Flowers,Medinilla
+571,Artificial Flowers,Michelia
+572,Artificial Flowers,Monstera
+573,Artificial Flowers,Moss
+574,Artificial Flowers,Native
+575,Artificial Flowers,Needle
+601,Artificial Flowers,Olive
+602,Artificial Flowers,Orchid
+603,Artificial Flowers,Palm Leaves
+604,Artificial Flowers,Pampas
+605,Artificial Flowers,Parsley
+606,Artificial Flowers,Peony
+607,Artificial Flowers,Phalaenopsis
+608,Artificial Flowers,Pieris
+609,Artificial Flowers,Pin Cushion
+610,Artificial Flowers,Pittosporum
+611,Artificial Flowers,Plume
+612,Artificial Flowers,Pom Pom
+613,Artificial Flowers,Popcorn
+614,Artificial Flowers,Poppy
+615,Artificial Flowers,Protea
+616,Artificial Flowers,Pussy
+617,Artificial Flowers,Queen Annes Lace
+618,Artificial Flowers,Ranunculus
+619,Artificial Flowers,Rose
+620,Artificial Flowers,Rosebud
+621,Artificial Flowers,Ruellia
+622,Artificial Flowers,Ruscus
+623,Artificial Flowers,Sawtooth
+624,Artificial Flowers,Scabiosa
+625,Artificial Flowers,Scadoxus
+626,Artificial Flowers,SeaHolly
+627,Artificial Flowers,Seed
+628,Artificial Flowers,Shikiba
+629,Artificial Flowers,Silver
+630,Artificial Flowers,Simplex
+631,Artificial Flowers,Smoke Bush
+632,Artificial Flowers,Snowball
+633,Artificial Flowers,Sorghum
+634,Artificial Flowers,Star Flower
+635,Artificial Flowers,Stephanotis
+636,Artificial Flowers,Stirlingia
+637,Artificial Flowers,Sun Flower
+638,Artificial Flowers,Sweet Gum
+639,Artificial Flowers,Sycamore
+640,Artificial Flowers,Taro
+641,Artificial Flowers,Tea
+642,Artificial Flowers,Tetragona
+643,Artificial Flowers,Thistle
+644,Artificial Flowers,Twig-NA
+645,Artificial Flowers,Tulip
+646,Artificial Flowers,Twig
+647,Artificial Flowers,Viburnum
+648,Artificial Flowers,Waratah
+649,Artificial Flowers,Wattles
+650,Artificial Flowers,Wax
+651,Artificial Flowers,Wheat
+652,Artificial Flowers,Willows
+653,Artificial Flowers,Wisteria
+654,Artificial Flowers,Woolly
+655,Artificial Flowers,Other Leaves
+656,Artificial Flowers,Other Spray
+657,Artificial Flowers,Daisy
+658,Artificial Flowers,Pansy
+659,Artificial Flowers,Tropical Flowers
+660,Artificial Flowers,Mimosa Flowers
+661,Artificial Flowers,Gardenia Flowers
+500,Artificial Flowers,Other Flowers
+701,Artificial Plants,Agave
+702,Artificial Plants,Aglaonema
+703,Artificial Plants,Airfern
+704,Artificial Plants,Alocasia
+705,Artificial Plants,Aluminium
+706,Artificial Plants,Angel
+708,Artificial Plants,Astilbe
+709,Artificial Plants,Auritum
+710,Artificial Plants,Baby's Breath
+713,Artificial Plants,Bell
+714,Artificial Plants,Berry
+715,Artificial Plants,Bougainvillea
+716,Artificial Plants,Boxwood
+717,Artificial Plants,Budding
+718,Artificial Plants,Cactus
+719,Artificial Plants,Caladium
+720,Artificial Plants,Calathea
+722,Artificial Plants,Cissus
+723,Artificial Plants,Clematis
+724,Artificial Plants,Coin Leaf
+725,Artificial Plants,Coleus
+726,Artificial Plants,Coral
+727,Artificial Plants,Cordyline
+728,Artificial Plants,Curry
+729,Artificial Plants,Cycas
+730,Artificial Plants,Dieffenbachia
+731,Artificial Plants,Echeveria
+732,Artificial Plants,Eucalyptus
+733,Artificial Plants,Evergreen
+734,Artificial Plants,Fern
+735,Artificial Plants,Fiddle
+737,Artificial Plants,Fittonia
+738,Artificial Plants,Flex
+739,Artificial Plants,Grape
+740,Artificial Plants,Grasses
+741,Artificial Plants,Hedge
+742,Artificial Plants,Herbs
+743,Artificial Plants,Hosta
+744,Artificial Plants,Hoya
+745,Artificial Plants,Ivy
+746,Artificial Plants,Lemon Greenery
+747,Artificial Plants,Jade
+748,Artificial Plants,Kalanchoe
+749,Artificial Plants,Laurel Leaf
+750,Artificial Plants,Lavender
+751,Artificial Plants,Lilies
+752,Artificial Plants,Locust
+753,Artificial Plants,Mint
+754,Artificial Plants,Monsteras
+755,Artificial Plants,Mosses
+756,Artificial Plants,Palm
+757,Artificial Plants,Peperomia
+758,Artificial Plants,Philodendron
+759,Artificial Plants,Piliostigma
+760,Artificial Plants,Philo
+761,Artificial Plants,Pothos
+762,Artificial Plants,Rhipsalis
+763,Artificial Plants,Ruscuses
+764,Artificial Plants,Sansevieria
+765,Artificial Plants,Santolina
+766,Artificial Plants,Sawtooth Greenery
+767,Artificial Plants,Saxifraga
+768,Artificial Plants,Scindapsus
+769,Artificial Plants,Sedum
+770,Artificial Plants,Senecio
+771,Artificial Plants,Silver Greenery
+772,Artificial Plants,Spathiphyllum
+773,Artificial Plants,Spider
+774,Artificial Plants,Stephanotis Greenery
+775,Artificial Plants,String of Angel Tears
+776,Artificial Plants,String of Pearls
+777,Artificial Plants,Succulent
+778,Artificial Plants,Syngonium
+779,Artificial Plants,Teas
+780,Artificial Plants,Trailing
+781,Artificial Plants,Tillandsia
+782,Artificial Plants,Vertical Garden
+783,Artificial Plants,Wandering Jew
+784,Artificial Plants,Wattle
+785,Artificial Plants,Wax Greenery
+786,Artificial Plants,Willow
+787,Artificial Plants,Yucca
+788,Artificial Plants,Zebra
+789,Artificial Plants,Geranium
+790,Artificial Plants,Tropical
+791,Artificial Plants,Garland
+793,Artificial Plants,Morning Glory
+700,Artificial Plants,Other Greenery
+707,Artificial Planter Plants,Grass Pot
+711,Artificial Planter Plants,Hanging Pot
+712,Artificial Planter Plants,Flower Pot
+721,Artificial Planter Plants,Other Pot
+736,Artificial Planter Plants,Fern Pot
+801,Artificial Planter Plants,Agave Plant
+802,Artificial Planter Plants,Aglaonema Plant
+803,Artificial Planter Plants,Alocasia Plant
+804,Artificial Planter Plants,Anthurium Plant
+805,Artificial Planter Plants,Begonia Plant
+806,Artificial Planter Plants,Birds Nest Plant
+807,Artificial Planter Plants,Boxwood Plant
+808,Artificial Planter Plants,Cactus Saguaro Plant
+809,Artificial Planter Plants,Caladium Plant
+810,Artificial Planter Plants,Calathea Plant
+811,Artificial Planter Plants,Cordyline Plant
+812,Artificial Planter Plants,Croton Plant
+813,Artificial Planter Plants,Ctenanthe Plant
+814,Artificial Planter Plants,Cycas Plant
+815,Artificial Planter Plants,Cymbidium Plant
+816,Artificial Planter Plants,Dieffenbachia Plant
+817,Artificial Planter Plants,Dracaena Plant
+818,Artificial Planter Plants,Eucalyptus Plant
+819,Artificial Planter Plants,Evergreen Plant
+820,Artificial Planter Plants,Fern Plant
+821,Artificial Planter Plants,Fittonia Plant
+822,Artificial Planter Plants,Grass Plant
+823,Artificial Planter Plants,Hosta Plant
+824,Artificial Planter Plants,Jade Plant
+825,Artificial Planter Plants,Kangaroo Paw Plant
+826,Artificial Planter Plants,Monstera Plant
+828,Artificial Planter Plants,Peperomia Plant
+829,Artificial Planter Plants,Peperomoides Plant
+830,Artificial Planter Plants,Philodendron Plant
+831,Artificial Planter Plants,Philowild Plant
+832,Artificial Planter Plants,Pothos Plant
+833,Artificial Planter Plants,Ruscus Plant
+834,Artificial Planter Plants,Spathiphyllum Plant
+835,Artificial Planter Plants,Spider Plant
+836,Artificial Planter Plants,String of Pearls Plant
+837,Artificial Planter Plants,Succulent Plant
+838,Artificial Planter Plants,Swiss Cheese Plant
+839,Artificial Planter Plants,Syngonium Plant
+840,Artificial Planter Plants,Wandering Jew Plant
+841,Artificial Planter Plants,Waratah Plant
+842,Artificial Planter Plants,Yucca Plant
+843,Artificial Planter Plants,Zanzibar Plant
+844,Artificial Planter Plants,Zebra Plant
+845,Artificial Planter Plants,Happy Plant
+846,Artificial Planter Plants,Hedge Plant
+800,Artificial Planter Plants,Other Plants
+001,Peripheral,Bowl
+002,Peripheral,Candle
+003,Peripheral,Pot
+004,Peripheral,Vase
+005,Peripheral,Fruit
+006,Peripheral,Vegetable
+007,Peripheral,Table
+008,Peripheral,Stand
+009,Peripheral,Basket
+901,Artificial Trees,Acacia Tree
+902,Artificial Trees,Palm Areca
+903,Artificial Trees,Bamboo
+904,Artificial Trees,Bird of Paradise
+905,Artificial Trees,Blossom Tree
+906,Artificial Trees,Bougainvillea Tree
+907,Artificial Trees,Cabada Tree
+908,Artificial Trees,Camellia Tree
+909,Artificial Trees,Palm Cane
+910,Artificial Trees,Cedar Tree
+911,Artificial Trees,Clusia Tree
+912,Artificial Trees,Cudrania Tree
+913,Artificial Trees,Dragon Tree
+914,Artificial Trees,Eucalyptus Tree
+915,Artificial Trees,Ficus Tree
+916,Artificial Trees,Fiddle Tree
+917,Artificial Trees,Ginkgo Tree
+918,Artificial Trees,Gum Tree
+919,Artificial Trees,Palm Kentia
+920,Artificial Trees,Lemon Tree
+921,Artificial Trees,Longifolia Tree
+922,Artificial Trees,Nandina Tree
+923,Artificial Trees,Olive Tree
+924,Artificial Trees,Pieris Tree
+925,Artificial Trees,Palm Fan
+926,Artificial Trees,Palm Raphis
+927,Artificial Trees,Rubber Tree
+928,Artificial Trees,Sliver Birch Tree
+929,Artificial Trees,Sky Bird
+930,Artificial Trees,Palm Travellers
+931,Artificial Trees,Wisteria Tree
+932,Artificial Trees,Palm Phoenix
+933,Artificial Trees,Boxwood Tree
+934,Artificial Trees,Topiary Tree
+935,Artificial Trees,Palm Parlour
+936,Artificial Trees,Pothos Tree
+937,Artificial Trees,Palm Cycad
+938,Artificial Trees,Lavender Tree
+939,Artificial Trees,Ruscus Tree
+900,Artificial Trees,Other Trees
+201,Hanging Basket,Flower Basket
+202,Hanging Basket,Greenery Basket
+203,Hanging Basket,Mixed Basket
+221,Indoor Landscape,Ground Landscape
+222,Indoor Landscape,Aerial Landscape
+223,Indoor Landscape,Mini Landscape
+224,Indoor Landscape,Waterscape
+225,Indoor Landscape,Living Landscape
