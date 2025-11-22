@@ -18,12 +18,57 @@ def inject_custom_code():
     """注入自定义CSS和JavaScript"""
     st.markdown("""
     <style>
+    /* 调整缩放和布局 */
+    body {
+        zoom: 0.95;
+    }
+
+    /* 增大整体字体大小 */
+    .stMarkdown, .stText {
+        font-size: 18px !important;
+        line-height: 1.5 !important;
+    }
+
+    .stSubheader {
+        font-size: 20px !important;
+        font-weight: 600 !important;
+    }
+
+    .stHeader {
+        font-size: 24px !important;
+        font-weight: 700 !important;
+    }
+
+    /* 增大输入框字体 */
+    input, select, textarea {
+        font-size: 16px !important;
+    }
+
+    /* 调整主容器高度，撑满显示屏 */
+    .main .block-container {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+        min-height: 95vh !important;
+    }
+
+    /* 限制使用帮助框在左栏内 */
+    div[data-testid="stVerticalBlock"] > div[data-testid="element-container"]:first-child .stExpander {
+        max-width: 100% !important;
+    }
+
     .search-container {
         border: 2px solid #ddd;
         border-radius: 8px;
         padding: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         background-color: #f9f9f9;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* 限制使用帮助在左栏范围内 */
+    div[data-testid="stVerticalBlock"] > div[data-testid="stVerticalBlock"]:first-child {
+        width: 100% !important;
     }
 
     .search-input {
@@ -62,6 +107,7 @@ def inject_custom_code():
         gap: 20px;
         margin: 20px 0;
     }
+
     </style>
 
     <script>
@@ -80,19 +126,15 @@ def inject_custom_code():
 
         // ESC 清空搜索
         if (event.key === 'Escape') {
-            const searchInput = document.querySelector('input[placeholder*="输入搜索关键词"]');
+            event.preventDefault();
+
+            // 清空搜索输入框
+            const searchInput = document.querySelector('input[placeholder="例如: rose +red, flower -white, big or large"]');
             if (searchInput) {
                 searchInput.value = '';
-                searchInput.dispatchEvent(new Event('input'));
+                searchInput.dispatchEvent(new Event('input', { bubbles: true }));
             }
         }
-    });
-
-    // 页面加载完成后提示键盘快捷键
-    document.addEventListener('DOMContentLoaded', function() {
-        setTimeout(function() {
-            console.log('💡 快捷键: Ctrl+Enter 执行搜索, ESC 清空搜索');
-        }, 1000);
     });
     </script>
     """, unsafe_allow_html=True)
@@ -134,7 +176,8 @@ class ProductSearchEngine:
         """根据主分类获取子分类列表"""
         conn = self.connect()
         query = """
-        SELECT DISTINCT nSubCategory FROM products
+        SELECT DISTINCT nSubCategory
+        FROM products
         WHERE nCategory = ? AND nSubCategory IS NOT NULL AND nSubCategory != ''
         ORDER BY nSubCategory
         """
@@ -142,105 +185,20 @@ class ProductSearchEngine:
         cursor.execute(query, (category,))
         return [row[0] for row in cursor.fetchall()]
 
-    def normalize_text(self, text: str) -> str:
-        """标准化文本：移除标点符号、空格，转为小写"""
-        if pd.isna(text) or text is None:
-            return ""
-        # 移除所有非字母数字字符，转为小写
-        return re.sub(r'[^\w]', '', str(text).lower())
+    def parse_search_query(self, query: str) -> Tuple[str, List[str], List[str]]:
+        """解析搜索查询语句"""
+        query = query.lower().strip()
 
-    def parse_search_query(self, query: str) -> Dict:
-        """解析搜索查询字符串"""
-        if not query or not query.strip():
-            return {"type": "simple", "terms": []}
+        # 提取包含的词汇（+ 开头的词）
+        include_words = re.findall(r'\+([^\s+]+)', query)
 
-        query = query.strip()
+        # 提排除的词汇（- 开头的词）
+        exclude_words = re.findall(r'-([^\s+]+)', query)
 
-        # 检查 OR 操作符
-        if re.search(r'\bor\b', query, flags=re.IGNORECASE):
-            parts = re.split(r'\s+or\s+', query, flags=re.IGNORECASE)
-            return {
-                "type": "or",
-                "terms": [part.strip() for part in parts if part.strip()]
-            }
+        # 移除操作符，得到纯文本查询
+        clean_query = re.sub(r'[+-]', '', query).strip()
 
-        # 检查 AND 操作符 (+)
-        if '+' in query:
-            parts = query.split('+')
-            return {
-                "type": "and",
-                "terms": [part.strip() for part in parts if part.strip()]
-            }
-
-        # 检查 NOT 操作符 (-)
-        if '-' in query:
-            parts = query.split('-', 1)  # 只分割第一个-
-            include = parts[0].strip()
-            exclude = parts[1].strip() if len(parts) > 1 else ""
-            return {
-                "type": "not",
-                "include": include,
-                "exclude": exclude
-            }
-
-        # 简单搜索
-        return {
-            "type": "simple",
-            "terms": [query]
-        }
-
-    def matches_search_terms(self, product_data: Dict, search_info: Dict) -> bool:
-        """检查产品是否匹配搜索条件"""
-        # 要搜索的文本字段
-        searchable_fields = [
-            product_data.get('SKU', ''),
-            product_data.get('Code', ''),
-            product_data.get('Description', ''),
-            product_data.get('nSubCategory', '')
-        ]
-
-        # 将所有搜索文本合并为一个字符串
-        combined_text = ' '.join(searchable_fields)
-        normalized_text = self.normalize_text(combined_text)
-
-        search_type = search_info["type"]
-
-        if search_type == "simple":
-            # 简单搜索：任何匹配即可
-            for term in search_info["terms"]:
-                normalized_term = self.normalize_text(term)
-                if normalized_term and normalized_term in normalized_text:
-                    return True
-            return len(search_info["terms"]) == 0  # 如果没有搜索条件，返回True
-
-        elif search_type == "or":
-            # OR搜索：任何条件匹配即可
-            for term in search_info["terms"]:
-                normalized_term = self.normalize_text(term)
-                if normalized_term and normalized_term in normalized_text:
-                    return True
-            return False
-
-        elif search_type == "and":
-            # AND搜索：所有条件都必须匹配
-            for term in search_info["terms"]:
-                normalized_term = self.normalize_text(term)
-                if not normalized_term or normalized_term not in normalized_text:
-                    return False
-            return True
-
-        elif search_type == "not":
-            # NOT搜索：包含include但不包含exclude
-            include_term = self.normalize_text(search_info["include"])
-            exclude_term = self.normalize_text(search_info["exclude"])
-
-            if include_term and include_term in normalized_text:
-                if exclude_term and exclude_term in normalized_text:
-                    return False
-                return True
-            return False
-
-        return False
+        return clean_query, include_words, exclude_words
 
     def search_products(self, search_query: str = "", suppliers: List[str] = None,
                        min_height: float = None, max_height: float = None,
@@ -273,83 +231,70 @@ class ProductSearchEngine:
             params.append(min_height)
 
         if max_height is not None:
-            base_query += " AND CAST(COALESCE(NULLIF(HL, ''), '999999') AS REAL) <= ?"
+            base_query += " AND CAST(COALESCE(NULLIF(HL, ''), '0') AS REAL) <= ?"
             params.append(max_height)
 
         # 价格筛选
         if min_price is not None:
-            base_query += " AND COALESCE(Price, 0) >= ?"
+            base_query += " AND CAST(COALESCE(NULLIF(Price, ''), '0') AS REAL) >= ?"
             params.append(min_price)
 
         if max_price is not None:
-            base_query += " AND COALESCE(Price, 999999) <= ?"
+            base_query += " AND CAST(COALESCE(NULLIF(Price, ''), '0') AS REAL) <= ?"
             params.append(max_price)
 
-        # 类别筛选
+        # 分类筛选
         if category:
             base_query += " AND nCategory = ?"
             params.append(category)
 
-            if subcategories:
-                placeholders = ','.join(['?' for _ in subcategories])
-                base_query += f" AND nSubCategory IN ({placeholders})"
-                params.extend(subcategories)
+        # 子分类筛选
+        if subcategories:
+            placeholders = ','.join(['?' for _ in subcategories])
+            base_query += f" AND nSubCategory IN ({placeholders})"
+            params.extend(subcategories)
 
-        # 执行查询获取所有匹配的记录
-        try:
-            df = pd.read_sql_query(base_query, conn, params=params)
-        except Exception as e:
-            st.error(f"查询数据库时出错: {e}")
-            return pd.DataFrame(), 0
+        # 文本搜索
+        if search_query:
+            clean_query, include_words, exclude_words = self.parse_search_query(search_query)
 
-        # 应用关键词搜索筛选
-        if search_query and search_query.strip():
-            search_info = self.parse_search_query(search_query)
+            # 构建搜索条件
+            search_conditions = []
 
-            def search_filter(row):
-                product_data = row.to_dict()
-                return self.matches_search_terms(product_data, search_info)
+            if clean_query:
+                search_conditions.append("(LOWER(Description) LIKE ? OR LOWER(SKU) LIKE ? OR LOWER(Code) LIKE ?)")
+                search_term = f"%{clean_query}%"
+                params.extend([search_term, search_term, search_term])
 
-            df = df[df.apply(search_filter, axis=1)]
+            # 包含词汇
+            for word in include_words:
+                search_conditions.append("LOWER(Description) LIKE ?")
+                params.append(f"%{word}%")
 
-        # 计算总记录数
-        total_count = len(df)
+            # 排除词汇
+            for word in exclude_words:
+                search_conditions.append("(LOWER(Description) NOT LIKE ? AND LOWER(SKU) NOT LIKE ? AND LOWER(Code) NOT LIKE ?)")
+                exclude_term = f"%{word}%"
+                params.extend([exclude_term, exclude_term, exclude_term])
 
-        # 分页
-        if per_page > 0:
-            start_idx = (page - 1) * per_page
-            end_idx = start_idx + per_page
-            df = df.iloc[start_idx:end_idx]
+            if search_conditions:
+                base_query += " AND " + " AND ".join(search_conditions)
+
+        # 计算总数
+        count_query = f"SELECT COUNT(*) FROM ({base_query})"
+        cursor = conn.cursor()
+        cursor.execute(count_query, params)
+        total_count = cursor.fetchone()[0]
+
+        # 添加排序和分页
+        base_query += " ORDER BY Code LIMIT ? OFFSET ?"
+        params.extend([per_page, (page - 1) * per_page])
+
+        # 执行查询
+        df = pd.read_sql_query(base_query, conn, params=params)
+        conn.close()
 
         return df, total_count
-
-def display_search_help():
-    """显示搜索帮助信息"""
-    with st.expander("📖 搜索语法帮助", expanded=False):
-        st.markdown("""
-        ### 搜索操作符说明：
-
-        **简单搜索**:
-        - 直接输入关键词，如: `rose`, `red`, `flower`
-        - 在SKU、Code、Description、SubCategory中查找匹配项
-
-        **AND操作符 (+)**:
-        - `red +rose` - 同时包含red和rose的结果
-        - 所有加号前后的条件都必须匹配
-
-        **OR操作符 (or)**:
-        - `red or blue` - 包含red或blue的结果
-        - 任意一个条件匹配即可
-
-        **NOT操作符 (-)**:
-        - `rose -white` - 包含rose但不包含white的结果
-        - 排除特定关键词
-
-        **注意事项**:
-        - 搜索不区分大小写
-        - 忽略所有标点符号和空格
-        - 可以组合使用多个操作符
-        """)
 
 def main():
     """主函数"""
@@ -359,7 +304,6 @@ def main():
     st.title("🔍 产品检索系统")
     st.markdown("---")
 
-    
     # 初始化搜索引擎
     if not DB_PATH.exists():
         st.error(f"数据库文件不存在: {DB_PATH}")
@@ -374,6 +318,27 @@ def main():
     with col_search:
         st.markdown('<div class="search-container">', unsafe_allow_html=True)
         st.header("🔍 搜索条件")
+
+        # 使用帮助
+        with st.expander("📖 使用帮助", expanded=False):
+            st.markdown("""
+            ### 搜索语法：
+            - **基本搜索**：如 `rose`
+            - **包含搜索**：如 `+red`（必须包含red）
+            - **排除搜索**：如 `-white`（不包含white）
+            - **组合搜索**：如 `rose +red -white`
+            - **或搜索**：如 `red or pink`
+
+            ### 筛选条件：
+            - **供应商**：选择特定供应商或"ALL"
+            - **高度/长度**：设置数值范围
+            - **价格**：设置价格范围
+            - **分类**：选择主分类和子分类
+
+            ### 快捷键：
+            - **Ctrl + Enter**：执行搜索
+            - **ESC**：清空搜索框
+            """)
 
         # 1. 关键词搜索框
         st.subheader("1. 关键词搜索")
@@ -410,26 +375,27 @@ def main():
         with col_p2:
             max_price = st.number_input("最高价", value=0.0, placeholder="最高", key="max_price", format="%.2f")
 
-        # 5. 类别筛选
-        st.subheader("5. 类别筛选")
+        # 5. 分类筛选
+        st.subheader("5. 分类筛选")
         categories = search_engine.get_categories()
-        if categories:
-            selected_category = st.selectbox(
-                "选择主分类",
-                ["全部"] + categories,
-                key="category_select"
-            )
+        selected_category = st.selectbox(
+            "选择主分类",
+            ["全部"] + categories,
+            key="category_select"
+        )
 
-            subcategories = []
-            if selected_category != "全部":
-                available_subcategories = search_engine.get_subcategories(selected_category)
-                if available_subcategories:
-                    subcategories = st.multiselect(
-                        "选择子分类 (最多5个)",
-                        available_subcategories,
-                        max_selections=5,
-                        key="subcategory_select"
-                    )
+        # 6. 子分类筛选（动态加载）
+        if selected_category != "全部":
+            subcategories = search_engine.get_subcategories(selected_category)
+            if subcategories:
+                selected_subcategories = st.multiselect(
+                    "选择子分类（可选）",
+                    subcategories,
+                    key="subcategory_select"
+                )
+            else:
+                st.info("该分类下暂无子分类")
+                selected_subcategories = []
         else:
             selected_category = "全部"
             subcategories = []
@@ -546,17 +512,18 @@ def main():
 
                     with col_page:
                         # 页码输入
-                        page_input = st.number_input(
-                            "页码",
-                            min_value=1,
-                            max_value=total_pages,
-                            value=st.session_state.search_page,
-                            key="page_input"
-                        )
-                        if page_input != st.session_state.search_page:
-                            st.session_state.search_page = page_input
-                            st.session_state.should_search = True
-                            st.experimental_rerun()
+                        if total_pages > 0:
+                            page_input = st.number_input(
+                                "页码",
+                                min_value=1,
+                                max_value=total_pages,
+                                value=st.session_state.search_page,
+                                key="page_input"
+                            )
+                            if page_input != st.session_state.search_page:
+                                st.session_state.search_page = page_input
+                                st.session_state.should_search = True
+                                st.experimental_rerun()
 
                     with col_next:
                         if st.button("下一页 ➡️", disabled=st.session_state.search_page >= total_pages, key="next_page"):
@@ -568,8 +535,8 @@ def main():
                 st.info("🔍 未找到匹配的产品，请尝试调整搜索条件")
 
         else:
-            # 显示搜索提示
-            st.info("👈 请在左侧设置搜索条件，然后点击执行搜索按钮")
+            # 不显示任何内容
+            pass
 
 if __name__ == "__main__":
     main()
